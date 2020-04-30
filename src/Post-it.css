@@ -1,0 +1,37 @@
+ .post-it {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 20px;
+    padding: 20px;
+
+    border: 1px solid rgb(253, 253, 1);
+    border-top: none;
+    border-left: none;
+    box-shadow: 0px 0px 10px rgba(121, 121, 121, 0.192);
+    background-color: rgb(255, 255, 193);
+
+    list-style: none;
+}
+.post-it--text {
+    margin: 0;
+    word-wrap: break-word;
+
+    font-size: 16px;
+    color: darkblue;
+}
+.delete {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 18px;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid black;
+    cursor: pointer;
+}
+.delete:hover,
+.delete:focus {
+    border:1px solid red;
+    color: red;
+}
