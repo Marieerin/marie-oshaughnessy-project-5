@@ -9,7 +9,13 @@ class App extends Component {
     super();
     this.state = {
       notes: [],
-      userInput: "",
+      // user input becomes json object
+        // object has color, and text
+        userInput: {
+          text: "",
+          // color: ,
+          // size: ,
+        },
       charLeft: 527,
     }
   }
@@ -20,9 +26,12 @@ componentDidMount(){
   dbRef.on('value', (result) => {
     const note = result.val();
     const newNote = [];
+    // console.log(note)
     for (let page in note){
       // pushes the text and id of new notes into newNote array
-      newNote.push({noteText: note[page], noteId: page})
+      // ADD color 
+      newNote.push({noteText: note[page].text, noteId: page, noteColor: note[page].color})
+      // newNote.push({noteText: note[page], noteId: page})
     }
     // updates notes on page
     this.setState({
@@ -36,29 +45,27 @@ handleSubmit = (event) => {
   event.preventDefault();
   // if there is anything in userInput 
   // if user input is !== not equal to and or not the same type as an empty string
-  if (this.state.userInput !== ""){
+  if (this.state.userInput.text !== " "){
     const dbRef = firebase.database().ref();
     // this submits new notes to the firebase database
     dbRef.push(this.state.userInput);
     this.setState({
-      userInput:'',
+      userInput:{
+        text:'',
+      }
     })
   }
     // add to the database
 }
-// handleCharCount = (event) => {
-//   const charCount = event.target.value.length;
-//   console.log(charCount)
-// }
+
 handleUserInput = (event) => {
   const charCount = event.target.value.length;
   const newCharLeft = 527 - charCount;
-  console.log(newCharLeft);
-
   // grab what the user is typing
-  console.log(event);
   this.setState({
-    userInput: event.target.value,
+    userInput: {
+      text: event.target.value
+    },
     charLeft: newCharLeft
   })
 }
@@ -68,8 +75,8 @@ render () {
       <header>
         <h1>POST IT!!!</h1>
         <form action="" onSubmit={this.handleSubmit}>
-          <label htmlFor="texInput">Write notes about what ever you want! Keep track of thoughts! Get inspired! Have some quotes? Postem here!</label>
-          <textarea value={this.state.userInput} onChange={this.handleUserInput} placeholder="Write notes about what ever you want! Keep track of thoughts! Get inspired! Have some quotes? Postem here!" name="textInput" maxLength="527" />
+          <label htmlFor="textInput">Write notes about what ever you want! Keep track of thoughts! Get inspired! Have some quotes? Postem here!</label>
+          <textarea value={this.state.userInput.text} onChange={this.handleUserInput} placeholder="Write notes about what ever you want! Keep track of thoughts! Get inspired! Have some quotes? Postem here!" name="textInput" maxLength="527" />
           <span className="charCount">{this.state.charLeft}/ 527</span>
           <input type="submit" value="Post!" className="submit"/>
         </form>
@@ -81,6 +88,7 @@ render () {
             return(
                   // pass info to Post-it notes
               <Postit noteId={note.noteId} noteText={note.noteText} />
+              // <Postit noteId={note.noteId} noteText={note.noteText} />
             )
           })}
         </ul>
