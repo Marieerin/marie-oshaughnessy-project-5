@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/marie-oshaughnessy-project-5/static/css/main.f714364c.chunk.css",
+    "main.js": "/marie-oshaughnessy-project-5/static/js/main.d082afee.chunk.js",
+    "main.js.map": "/marie-oshaughnessy-project-5/static/js/main.d082afee.chunk.js.map",
+    "runtime-main.js": "/marie-oshaughnessy-project-5/static/js/runtime-main.481d72ae.js",
+    "runtime-main.js.map": "/marie-oshaughnessy-project-5/static/js/runtime-main.481d72ae.js.map",
+    "static/js/2.ff5e8808.chunk.js": "/marie-oshaughnessy-project-5/static/js/2.ff5e8808.chunk.js",
+    "static/js/2.ff5e8808.chunk.js.map": "/marie-oshaughnessy-project-5/static/js/2.ff5e8808.chunk.js.map",
+    "index.html": "/marie-oshaughnessy-project-5/index.html",
+    "precache-manifest.707e67cf55024df73f9d8a3e1a6b825e.js": "/marie-oshaughnessy-project-5/precache-manifest.707e67cf55024df73f9d8a3e1a6b825e.js",
+    "service-worker.js": "/marie-oshaughnessy-project-5/service-worker.js",
+    "static/css/main.f714364c.chunk.css.map": "/marie-oshaughnessy-project-5/static/css/main.f714364c.chunk.css.map",
+    "static/js/2.ff5e8808.chunk.js.LICENSE.txt": "/marie-oshaughnessy-project-5/static/js/2.ff5e8808.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.481d72ae.js",
+    "static/js/2.ff5e8808.chunk.js",
+    "static/css/main.f714364c.chunk.css",
+    "static/js/main.d082afee.chunk.js"
+  ]
+}
