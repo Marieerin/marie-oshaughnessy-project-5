@@ -12,7 +12,7 @@ const Postit = (props) => {
     }
 
     return(
-        <li className="post-it">
+        <li className={props.color}>
             {/* listens for a click and calls deleteNote */}
             <span onClick={() => { deleteNote() }} className="delete">x</span>
             {/* grab info from notes array(App.js) and places it in a postit */}
@@ -20,4 +20,5 @@ const Postit = (props) => {
         </li>
     )
 }
+
 export default Postit;

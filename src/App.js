@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import firebase from './firebase';
+import Colorselect from './Color-select.js'
 import Postit from './Post-it';
+
+import './setup.css'
 import './App.css';
 
 
@@ -9,13 +12,10 @@ class App extends Component {
     super();
     this.state = {
       notes: [],
-      // user input becomes json object
-        // object has color, and text
-        userInput: {
-          text: "",
-          // color: ,
-          // size: ,
-        },
+      userInput: {
+        text: "",
+        color: "",
+      },
       charLeft: 527,
     }
   }
@@ -25,76 +25,103 @@ componentDidMount(){
   const dbRef = firebase.database().ref();
   dbRef.on('value', (result) => {
     const note = result.val();
-    const newNote = [];
-    // console.log(note)
+    const newNotes = [];
     for (let page in note){
-      // pushes the text and id of new notes into newNote array
-      // ADD color 
-      newNote.push({noteText: note[page].text, noteId: page, noteColor: note[page].color})
-      // newNote.push({noteText: note[page], noteId: page})
+      // pushes the text and id of new notes into newNotes array
+      newNotes.push({noteText: note[page].text, noteId: page, color: note[page].color}) 
     }
     // updates notes on page
     this.setState({
-      notes: newNote
+      notes: newNotes
     })
   })
 }
-
 handleSubmit = (event) => {
   // prevent default behavior of submit button
   event.preventDefault();
   // if there is anything in userInput 
-  // if user input is !== not equal to and or not the same type as an empty string
-  if (this.state.userInput.text !== " "){
+  if (this.state.userInput.text === "") { 
+      alert('YOU DIDNT WRITE ANYTHING! WRITE SOMETHING!')
+  } else {
     const dbRef = firebase.database().ref();
     // this submits new notes to the firebase database
     dbRef.push(this.state.userInput);
     this.setState({
-      userInput:{
-        text:'',
-      }
-    })
+      userInput: {
+        text: "",
+        color: this.state.userInput.color
+      },
+      charLeft: 527
+    });
   }
-    // add to the database
 }
 
 handleUserInput = (event) => {
+  //calculate the number of characters left
   const charCount = event.target.value.length;
   const newCharLeft = 527 - charCount;
   // grab what the user is typing
   this.setState({
     userInput: {
-      text: event.target.value
+      text: event.target.value,
+      color: this.state.userInput.color
     },
     charLeft: newCharLeft
   })
 }
+
+getColorChoice = (colorName) => {
+  this.setState({
+    userInput: {
+      color: colorName,
+      text: this.state.userInput.text
+    },
+  })
+
+}
 render () {
   return (
-    <div className="App">
+    <div className="App wrapper">
       <header>
-        <h1>POST IT!!!</h1>
-        <form action="" onSubmit={this.handleSubmit}>
-          <label htmlFor="textInput">Write notes about what ever you want! Keep track of thoughts! Get inspired! Have some quotes? Postem here!</label>
-          <textarea value={this.state.userInput.text} onChange={this.handleUserInput} placeholder="Write notes about what ever you want! Keep track of thoughts! Get inspired! Have some quotes? Postem here!" name="textInput" maxLength="527" />
-          <span className="charCount">{this.state.charLeft}/ 527</span>
-          <input type="submit" value="Post!" className="submit"/>
-        </form>
+        <ul className="app-controls">
+          <li className="blank-for-now"></li>
+          <li className="main-header-list-item">
+            <h1>POST IT!!!</h1>
+            <form action="" onSubmit={this.handleSubmit}>
+              <label htmlFor="textInput">
+                Write notes about what ever you want! Keep track of thoughts!
+                Get inspired! Have some quotes? Postem here!
+              </label>
+              <textarea
+                value={this.state.userInput.text}
+                onChange={this.handleUserInput}
+                placeholder="Write notes about what ever you want! Keep track of thoughts! Get inspired! Have some quotes? Postem here!"
+                name="textInput"
+                maxLength="527"
+              />
+              <span className="charCount">{this.state.charLeft}/ 527</span>
+              <input type="submit" value="Post!" className="submit" />
+            </form>
+          </li>
+          <Colorselect getColorChoice={this.getColorChoice} />
+        </ul>
       </header>
       <main>
-        <ul>
+        <ul className="post-it-notes">
           {this.state.notes.map((note) => {
-            // console.log(note.noteId);
-            return(
-                  // pass info to Post-it notes
-              <Postit noteId={note.noteId} noteText={note.noteText} />
-              // <Postit noteId={note.noteId} noteText={note.noteText} />
-            )
+            return (
+              // pass info to Post-it notes
+              <Postit
+                noteId={note.noteId}
+                noteText={note.noteText}
+                color={note.color}
+              />
+            );
           })}
         </ul>
       </main>
     </div>
-    );
+  );
   }
 }
 

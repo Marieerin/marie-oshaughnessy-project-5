@@ -1,4 +1,4 @@
- .post-it {
+.post-it-notes li {
     position: relative;
     width: 300px;
     height: 300px;
@@ -6,13 +6,34 @@
     padding: 20px;
 
     border: 1px solid rgb(253, 253, 1);
-    border-top: none;
-    border-left: none;
+    border-top: none!important;
+    border-left: none!important;
     box-shadow: 0px 0px 10px rgba(121, 121, 121, 0.192);
     background-color: rgb(255, 255, 193);
 
     list-style: none;
+} 
+
+li.yellow {
+    border: 1px solid rgb(253, 253, 1);
+    background-color: rgb(255, 255, 193);
 }
+
+li.pink {
+    border: 1px solid rgb(253, 1, 240);
+    background-color: rgb(247, 150, 242);
+}
+
+li.teal {
+    border: 1px solid rgb(1, 253, 211);
+    background-color: rgb(160, 255, 239);
+}
+
+li.green {
+    border: 1px solid rgb(135, 253, 1);
+    background-color: rgb(205, 255, 147);
+}
+
 .post-it--text {
     margin: 0;
     word-wrap: break-word;
@@ -25,11 +46,13 @@
     top: 5px;
     right: 5px;
     width: 18px;
+    
     text-align: center;
     border-radius: 50%;
     border: 1px solid black;
     cursor: pointer;
 }
+
 .delete:hover,
 .delete:focus {
     border:1px solid red;

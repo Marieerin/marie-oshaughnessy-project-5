@@ -1,52 +1,75 @@
 @import url('https://fonts.googleapis.com/css?family=Courier+Prime|Montserrat:700&display=swap');
 
+.wrapper {
+    max-width: 1500px;
+    margin: 0 auto;
+}
 .App {
     overflow-x: hidden;
     font-family: 'Courier Prime', monospace;
 }
-header,
+
+.app-controls,
 form,
 ul,
-.App {
+.App,
+.main-header-list-item {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-header,
-form,
-.App {
-    flex-direction: column;
 
+form,
+.App,
+.main-header-list-item {
+    flex-direction: column;
 }
 
 /* header */
 header {
     padding: 30px;
 }
-h1 {
-     font-family: 'Montserrat', sans-serif;
-    font-size: calc(30px + .9vw);
+.app-controls{
+    justify-content: space-around;
 }
-label{
+
+.app-controls li {
+    margin: 0 25px;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: calc(30px + .9vw);
+    margin: 0 0 28px;
+}
+
+.main-header-list-item label{
     visibility: hidden;
     position: absolute;
 }
+
 textarea {
     padding: 5px;
-    width: 219px;
+    width: 250px;
     height: 104px;
     
     border: 1px solid gray;
     border-radius: 3px;
-    
+
     font-size: 16px;
 }
+
 .charCount{
     font-size: smaller;
 }
+
 .submit {
     cursor: pointer;
     margin-top: 11px;
+    padding: 14px 50px;
+
+    background-color: rgba(253, 222, 1, 1);
+    border-radius: 20px;
 }
 
 /* main */
@@ -54,10 +77,27 @@ ul {
     flex-wrap: wrap;
     padding: 0;
 }
+
 li {
     list-style: none;
 }
 
+@media only screen and (max-width: 788px){
+    .app-controls{
+        flex-direction: column;
+    }
+    li.color-select {
+        margin: 25px;
+    }
+
+    .color-select form {
+        flex-direction: row;
+    }
+
+    .blank-for-now{
+        display: none;
+    }
+}
 
 @media only screen and (max-width: 400px){
     .post-it{
@@ -65,6 +105,7 @@ li {
         height: 250px;
         margin: 5px;
     }
+
     .post-it--text,
     textarea{
         font-size: 12px;
