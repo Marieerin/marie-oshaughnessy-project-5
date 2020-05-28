@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from './firebase';
+import Fontsize from './Font-size.js'
 import Colorselect from './Color-select.js'
 import Postit from './Post-it';
 
@@ -15,8 +16,9 @@ class App extends Component {
       userInput: {
         text: "",
         color: "",
+        fontSize: "",
       },
-      charLeft: 527,
+      charLeft: 432,
     }
   }
 
@@ -51,7 +53,7 @@ handleSubmit = (event) => {
         text: "",
         color: this.state.userInput.color
       },
-      charLeft: 527
+      charLeft: 432
     });
   }
 }
@@ -59,7 +61,7 @@ handleSubmit = (event) => {
 handleUserInput = (event) => {
   //calculate the number of characters left
   const charCount = event.target.value.length;
-  const newCharLeft = 527 - charCount;
+  const newCharLeft = 432 - charCount;
   // grab what the user is typing
   this.setState({
     userInput: {
@@ -85,6 +87,7 @@ render () {
       <header>
         <ul className="app-controls">
           <li className="blank-for-now"></li>
+          < Fontsize />
           <li className="main-header-list-item">
             <h1>POST IT!!!</h1>
             <form action="" onSubmit={this.handleSubmit}>
@@ -97,13 +100,14 @@ render () {
                 onChange={this.handleUserInput}
                 placeholder="Write notes about what ever you want! Keep track of thoughts! Get inspired! Have some quotes? Postem here!"
                 name="textInput"
-                maxLength="527"
+                maxLength="432"
               />
-              <span className="charCount">{this.state.charLeft}/ 527</span>
+              <span className="charCount">{this.state.charLeft}/ 432</span>
               <input type="submit" value="Post!" className="submit" />
             </form>
           </li>
           <Colorselect getColorChoice={this.getColorChoice} />
+
         </ul>
       </header>
       <main>
@@ -117,7 +121,7 @@ render () {
                 color={note.color}
               />
             );
-          })}
+          }).reverse()}
         </ul>
       </main>
     </div>

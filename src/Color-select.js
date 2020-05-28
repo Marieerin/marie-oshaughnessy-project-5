@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Color-select.css"
+import "./Post-it.css"
 
 class Colorselect extends Component {
     constructor(){
@@ -19,23 +19,23 @@ class Colorselect extends Component {
                     className="color-swatch yellow"></label>
                 <input
                     type="radio"
-                    value="yellow"
+                    id="yellow"
                     name="color-swatch"
                     defaultChecked="checked"/>
                 <label htmlFor="pink" className="color-swatch pink"></label>
                 <input
                     type="radio"
-                    value="pink"
+                    id="pink"
                     name="color-swatch"/>
                 <label htmlFor="teal" className="color-swatch teal"></label>
                 <input
                     type="radio"
-                    value="teal"
+                    id="teal"
                     name="color-swatch"/>
                 <label htmlFor="green" className="color-swatch green"></label>
                 <input
                     type="radio"
-                    value="green"
+                    id="green"
                     name="color-swatch"/>
                 </form>
             </li>

@@ -1,3 +1,4 @@
+/* .post-it-notes */
 .post-it-notes li {
     position: relative;
     width: 300px;
@@ -5,32 +6,28 @@
     margin: 20px;
     padding: 20px;
 
-    border: 1px solid rgb(253, 253, 1);
-    border-top: none!important;
-    border-left: none!important;
-    box-shadow: 0px 0px 10px rgba(121, 121, 121, 0.192);
+    /* box-shadow: 0px 0px 10px rgba(121, 121, 121, 0.192); */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(213, 213, 213, 0.15) inset;
     background-color: rgb(255, 255, 193);
-
     list-style: none;
 } 
-
+.yellow,
 li.yellow {
-    border: 1px solid rgb(253, 253, 1);
     background-color: rgb(255, 255, 193);
 }
 
+.pink,
 li.pink {
-    border: 1px solid rgb(253, 1, 240);
     background-color: rgb(247, 150, 242);
 }
 
+.teal,
 li.teal {
-    border: 1px solid rgb(1, 253, 211);
     background-color: rgb(160, 255, 239);
 }
 
+.green,
 li.green {
-    border: 1px solid rgb(135, 253, 1);
     background-color: rgb(205, 255, 147);
 }
 
@@ -58,3 +55,21 @@ li.green {
     border:1px solid red;
     color: red;
 }
+
+/* color select */
+input[type="radio"]{
+    margin: 6px;
+}
+
+.color-swatch{
+        height: 35px;
+        width: 35px;
+    
+        border-top: none;
+        border-left: none;
+        box-shadow: 0px 0px 10px rgba(121, 121, 121, 0.192);
+    }
+.color-swatch:checked {
+    border: 3px solid black;
+}
+/* color select end */
