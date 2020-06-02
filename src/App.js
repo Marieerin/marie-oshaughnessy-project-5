@@ -20,6 +20,7 @@ class App extends Component {
         charLimit: 432,
       },
       charLeft: 432,
+      numTyped: 0,
     }
     
   }
@@ -60,7 +61,8 @@ handleSubmit = (event) => {
         fontSize: this.state.userInput.fontSize,
         charLimit: this.state.userInput.charLimit,
       },
-      charLeft: this.state.userInput.charLimit
+      charLeft: this.state.userInput.charLimit,
+      numTyped: this.state.numTyped
     });
   }
 }
@@ -78,7 +80,8 @@ handleUserInput = (event) => {
       fontSize: this.state.userInput.fontSize,
       charLimit: this.state.userInput.charLimit,
     },
-    charLeft: newCharLeft
+    charLeft: newCharLeft,
+    numTyped: charCount
   })
 }
 
@@ -90,7 +93,8 @@ getColorChoice = (colorName) => {
       fontSize: this.state.userInput.fontSize,
       charLimit: this.state.userInput.charLimit,
     },
-    charLeft: this.state.userInput.charLimit
+    charLeft: this.state.charLeft,
+    numTyped: this.state.numTyped
   })
 }
 
@@ -105,7 +109,8 @@ getFontSize = (fontSize) => {
         fontSize: fontSize,
         charLimit: 432,
       },
-      charLeft: 432
+      charLeft: 432 - this.state.numTyped,
+      numTyped: this.state.numTyped
     })
   } else if (fontSize === "med"){
     // sets font size
@@ -116,7 +121,8 @@ getFontSize = (fontSize) => {
         fontSize: fontSize,
         charLimit: 198,
       },
-      charLeft: 198
+      charLeft: 198 - this.state.numTyped,
+      numTyped: this.state.numTyped
     })
   } else if (fontSize === "lrg"){
     // sets font size
@@ -127,7 +133,8 @@ getFontSize = (fontSize) => {
         fontSize: fontSize,
         charLimit: 104,
       },
-      charLeft: 104
+      charLeft: 104 - this.state.numTyped,
+      numTyped: this.state.numTyped
     })
   } else if (fontSize === 'xlrg'){
     // sets font size
@@ -138,7 +145,8 @@ getFontSize = (fontSize) => {
         fontSize: fontSize,
         charLimit: 77,
       },
-      charLeft: 77
+      charLeft: 77 - this.state.numTyped,
+      numTyped: this.state.numTyped
     })
   } else {
     // sets font size
@@ -149,7 +157,8 @@ getFontSize = (fontSize) => {
         fontSize: fontSize,
         charLimit: 432,
       },
-      charLeft: 432 
+      charLeft: 432 - this.state.numTyped,
+      numTyped: this.state.numTyped
     })
   }
 }
