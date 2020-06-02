@@ -12,9 +12,9 @@ const Postit = (props) => {
     }
 
     return(
-        <li className={props.color}>
+        <li className={`${props.color} ${props.fontSize}`}>
             {/* listens for a click and calls deleteNote */}
-            <span onClick={() => { deleteNote() }} className="delete">x</span>
+            <span onClick={() => { deleteNote() }} className="delete" title="delete note">x</span>
             {/* grab info from notes array(App.js) and places it in a postit */}
             <p className="post-it--text" key={props.noteId}>{props.noteText}</p>
         </li>

@@ -7,7 +7,7 @@
     padding: 20px;
 
     /* box-shadow: 0px 0px 10px rgba(121, 121, 121, 0.192); */
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(213, 213, 213, 0.15) inset;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(40, 40, 40, 0.03) inset;
     background-color: rgb(255, 255, 193);
     list-style: none;
 } 
@@ -35,7 +35,7 @@ li.green {
     margin: 0;
     word-wrap: break-word;
 
-    font-size: 16px;
+    /* font-size: 16px; */
     color: darkblue;
 }
 .delete {
@@ -44,6 +44,7 @@ li.green {
     right: 5px;
     width: 18px;
     
+    font-size: 16px;
     text-align: center;
     border-radius: 50%;
     border: 1px solid black;

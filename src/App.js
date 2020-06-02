@@ -15,11 +15,13 @@ class App extends Component {
       notes: [],
       userInput: {
         text: "",
-        color: "",
-        fontSize: "",
+        color: "yellow",
+        fontSize: "small",
+        charLimit: 432,
       },
       charLeft: 432,
     }
+    
   }
 
 componentDidMount(){
@@ -29,8 +31,11 @@ componentDidMount(){
     const note = result.val();
     const newNotes = [];
     for (let page in note){
+      console.log(note[page].fontSize)
+      console.log(typeof note[page].fontSize)
+
       // pushes the text and id of new notes into newNotes array
-      newNotes.push({noteText: note[page].text, noteId: page, color: note[page].color}) 
+      newNotes.push({noteText: note[page].text, noteId: page, color: note[page].color, fontSize: note[page].fontSize, count: note[page].charLimit}) 
     }
     // updates notes on page
     this.setState({
@@ -43,7 +48,7 @@ handleSubmit = (event) => {
   event.preventDefault();
   // if there is anything in userInput 
   if (this.state.userInput.text === "") { 
-      alert('YOU DIDNT WRITE ANYTHING! WRITE SOMETHING!')
+      alert("YOU DIDN'T WRITE ANYTHING! WRITE SOMETHING!")
   } else {
     const dbRef = firebase.database().ref();
     // this submits new notes to the firebase database
@@ -51,22 +56,27 @@ handleSubmit = (event) => {
     this.setState({
       userInput: {
         text: "",
-        color: this.state.userInput.color
+        color: this.state.userInput.color,
+        fontSize: this.state.userInput.fontSize,
+        charLimit: this.state.userInput.charLimit,
       },
-      charLeft: 432
+      charLeft: this.state.userInput.charLimit
     });
   }
 }
 
 handleUserInput = (event) => {
-  //calculate the number of characters left
+  //the length of characters that have been typed
   const charCount = event.target.value.length;
-  const newCharLeft = 432 - charCount;
-  // grab what the user is typing
+  // take the character limit that has been selected by the font size the user selects and subtract from how much has been typed in the textbox
+  const newCharLeft = this.state.userInput.charLimit - charCount;
+  // save what what the user is typing
   this.setState({
     userInput: {
       text: event.target.value,
-      color: this.state.userInput.color
+      color: this.state.userInput.color,
+      fontSize: this.state.userInput.fontSize,
+      charLimit: this.state.userInput.charLimit,
     },
     charLeft: newCharLeft
   })
@@ -76,36 +86,105 @@ getColorChoice = (colorName) => {
   this.setState({
     userInput: {
       color: colorName,
-      text: this.state.userInput.text
+      text: this.state.userInput.text,
+      fontSize: this.state.userInput.fontSize,
+      charLimit: this.state.userInput.charLimit,
     },
+    charLeft: this.state.userInput.charLimit
   })
+}
 
+getFontSize = (fontSize) => {
+  // // passes on the number of characters total for each size of text
+  if(fontSize === "small"){
+    // sets font size
+    this.setState({
+      userInput: {
+        color: this.state.userInput.color,
+        text: this.state.userInput.text,
+        fontSize: fontSize,
+        charLimit: 432,
+      },
+      charLeft: 432
+    })
+  } else if (fontSize === "med"){
+    // sets font size
+    this.setState({
+      userInput: {
+        color: this.state.userInput.color,
+        text: this.state.userInput.text,
+        fontSize: fontSize,
+        charLimit: 198,
+      },
+      charLeft: 198
+    })
+  } else if (fontSize === "lrg"){
+    // sets font size
+    this.setState({
+      userInput: {
+        color: this.state.userInput.color,
+        text: this.state.userInput.text,
+        fontSize: fontSize,
+        charLimit: 104,
+      },
+      charLeft: 104
+    })
+  } else if (fontSize === 'xlrg'){
+    // sets font size
+    this.setState({
+      userInput: {
+        color: this.state.userInput.color,
+        text: this.state.userInput.text,
+        fontSize: fontSize,
+        charLimit: 77,
+      },
+      charLeft: 77
+    })
+  } else {
+    // sets font size
+    this.setState({
+      userInput: {
+        color: this.state.userInput.color,
+        text: this.state.userInput.text,
+        fontSize: fontSize,
+        charLimit: 432,
+      },
+      charLeft: 432 
+    })
+  }
 }
 render () {
   return (
     <div className="App wrapper">
       <header>
         <ul className="app-controls">
-          <li className="blank-for-now"></li>
-          < Fontsize />
+          {/* below is the format for blank list items used to balance out the header when there is an odd of features. A list item with the class of .blank-for-now is added at the opposite end for the header, resulting in the textarea being center front of the page. */}
+          {/* <li className="blank-for-now"></li> */}
+
+          {/* displays font size widget. */}
+          < Fontsize getFontSize={this.getFontSize}  />
+
+          {/* the note taking section including a textarea to take notes and a character counter that shows how many more characters you can add. */}
           <li className="main-header-list-item">
             <h1>POST IT!!!</h1>
             <form action="" onSubmit={this.handleSubmit}>
               <label htmlFor="textInput">
                 Write notes about what ever you want! Keep track of thoughts!
-                Get inspired! Have some quotes? Postem here!
+                Get inspired! Have some quotes? Pick a color! Pick a font size! Postem here!
               </label>
               <textarea
                 value={this.state.userInput.text}
                 onChange={this.handleUserInput}
-                placeholder="Write notes about what ever you want! Keep track of thoughts! Get inspired! Have some quotes? Postem here!"
+                placeholder="Write notes about what ever you want! Keep track of thoughts! Get inspired! Have some quotes? Pick a color! Pick a font size! Postem here!"
                 name="textInput"
-                maxLength="432"
+                maxLength={this.state.userInput.charLimit}
               />
-              <span className="charCount">{this.state.charLeft}/ 432</span>
-              <input type="submit" value="Post!" className="submit" />
+              <span className="charCount" >{this.state.charLeft}/ {this.state.userInput.charLimit}</span>
+              <input type="submit" value="Post!" className="submit" title="post your note" />
             </form>
           </li>
+
+          {/* displays color selection for the notes */}
           <Colorselect getColorChoice={this.getColorChoice} />
 
         </ul>
@@ -119,11 +198,15 @@ render () {
                 noteId={note.noteId}
                 noteText={note.noteText}
                 color={note.color}
+                fontSize={note.fontSize}
               />
             );
           }).reverse()}
         </ul>
       </main>
+      <footer>
+        <span>Designed and created by Marie O'Shaughnessy</span>
+      </footer>
     </div>
   );
   }
