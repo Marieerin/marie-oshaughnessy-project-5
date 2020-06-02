@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/marie-oshaughnessy-project-5/precache-manifest.707e67cf55024df73f9d8a3e1a6b825e.js"
+  "/marie-oshaughnessy-project-5/precache-manifest.c485bb9d47e62e5133863efcfcee7aca.js"
 );
 
 self.addEventListener('message', (event) => {
